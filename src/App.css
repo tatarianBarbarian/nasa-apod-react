@@ -1,0 +1,22 @@
+.controls {
+    padding-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.controls > *:not(:last-child) {
+    margin-right: 8px;
+    margin-bottom: 10px;
+    }
+
+.viewzone {
+    display: grid;
+    grid-template-columns: 45% minmax(400px, 600px);
+    column-gap: 20px;
+    justify-content: center;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.5;
+}
