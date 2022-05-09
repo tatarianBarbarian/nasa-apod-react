@@ -1,7 +1,8 @@
 import { rest, setupWorker } from "msw";
 import { formatDate, getPrevDate } from "../date";
+import { API_URL } from "../api";
 
-const handler = rest.get('https://api.nasa.gov/planetary/apod', (req, res, ctx) => {
+const handler = rest.get(API_URL, (req, res, ctx) => {
     const reqDate = req.url.searchParams.get('date');
     const today = formatDate(new Date());
 
