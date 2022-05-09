@@ -7,12 +7,20 @@ import {
   QueryClientProvider,
 } from 'react-query';
 
+async function prepare() {
+  if (import.meta.env.DEV) {
+    const { worker } = await import('./mock/serverMock');
+    return worker.start()
+  }
+  return Promise.resolve()
+}
+
 const queyClient = new QueryClient(); // FIXME: Move to App.js with provider
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-  <QueryClientProvider client={queyClient}>
-    <App />
-  </QueryClientProvider>
-  // </React.StrictMode>
-)
+prepare().then(() => {
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <QueryClientProvider client={queyClient}>
+      <App />
+    </QueryClientProvider>
+  )
+})
