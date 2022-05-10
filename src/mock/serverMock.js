@@ -2,7 +2,7 @@ import { rest, setupWorker } from "msw";
 import { formatDate, getPrevDate } from "../date";
 import { API_URL } from "../api";
 
-const handler = rest.get(API_URL, (req, res, ctx) => {
+export const handler = rest.get(API_URL, (req, res, ctx) => {
     const reqDate = req.url.searchParams.get('date');
     const today = formatDate(new Date());
 
