@@ -54,7 +54,7 @@ function App() {
         <Button onClick={() => setAboutInfoVisible(true)}>❔</Button>
       </div>
       <div style={{textAlign: 'center'}}>
-        {isLoading ? <Spin size='large' /> : null}
+        {isLoading ? <Spin size='large' data-testid="spinner" /> : null}
         <Image 
           src={url}
           style={{maxHeight: '80vh', objectFit: 'contain'}}
