@@ -71,7 +71,9 @@ function App() {
         visible={isAboutInfoVisible}
         key={'about app'}
       >
-        <p>Based on NASA API</p>
+        <p>Based on <a href='https://api.nasa.gov/'>NASA API</a></p>
+        <p>Made by <a href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
+        <p><a href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
       </Drawer>
       <Drawer
           title={title}
