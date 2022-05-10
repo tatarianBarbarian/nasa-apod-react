@@ -1,4 +1,4 @@
-import { rest, setupWorker } from "msw";
+import { rest } from "msw";
 import { formatDate, getPrevDate } from "../date";
 import { API_URL } from "../api";
 
@@ -46,5 +46,3 @@ export const handler = rest.get(API_URL, (req, res, ctx) => {
         "url": "/src/mock/img/3.jpg"
     }))
 })
-
-export const worker = setupWorker(handler);

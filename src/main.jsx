@@ -7,9 +7,11 @@ import {
   QueryClientProvider,
 } from 'react-query';
 
+console.log(import.meta.env);
+
 async function prepare() {
-  if (import.meta.env.MODE === 'development') {
-    const { worker } = await import('./mock/serverMock');
+  if (import.meta.env.DEV && !import.meta.env.TEST) {
+    const { worker } = await import('./mock/worker');
     return worker.start()
   }
   return Promise.resolve()
