@@ -15,15 +15,6 @@ describe('<Viewer />', () => {
         expect(container).toMatchSnapshot();
     })
 
-    it('given error, should render message with error text', () => {
-        const error = new Error('Error text!');
-        render(<Viewer error={error} />)
-        const message = screen.getByText(/error text/i);
-        
-        expect(message).toBeVisible();
-        expect(message.textContent).toMatchInlineSnapshot('"Error text!"');
-    })
-
     it('given unsopprted media type, should render message about it', () => {
         const data = {
             media_type: 'other'

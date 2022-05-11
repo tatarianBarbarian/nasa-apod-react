@@ -55,7 +55,13 @@ function App() {
         <Button onClick={() => setAboutInfoVisible(true)}>❔</Button>
       </div>
       <div style={{textAlign: 'center'}}>
-        {isLoading ? <Spin size='large' data-testid="spinner" /> : <Viewer error={error} data={data}/>}
+        {
+          isLoading 
+            ? <Spin size='large' data-testid="spinner" /> 
+            : error
+              ? <p style={{color: 'white'}}>{error.message}</p>
+              : <Viewer data={data} />
+        }
       </div>
       <Drawer
         title="About app"

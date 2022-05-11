@@ -2,12 +2,8 @@ import { Image } from 'antd';
 import 'antd/es/image/style/index.css';
 
 
-export function Viewer({error, data = {}}) {
+export function Viewer({data = {}}) {
     const {url, hdurl, media_type} = data;
-  
-    if (error) {
-      return <p style={{color: 'white'}}>{error.message}</p>
-    }
   
     if (media_type === 'image') {
       return (
