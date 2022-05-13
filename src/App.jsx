@@ -1,17 +1,24 @@
 import './App.css'
-import { Button, Image, Drawer, Spin } from 'antd';
+import { Button, Drawer, Spin } from 'antd';
 import DatePicker from './DatePicker';
 import 'antd/es/style/default.css';
 import 'antd/es/button/style/index.css';
-import 'antd/es/image/style/index.css';
 import 'antd/es/drawer/style/index.css';
 import 'antd/es/spin/style/index.css';
+import { Viewer } from './Viewer';
 
 import { useQuery } from 'react-query';
-import { fetchApodData } from './api';
+import { fetchApodDataQuery } from './api';
 import {useDateReducer} from './useDateReducer';
 import { useState } from 'react';
 import { formatDate } from './date';
+
+const validateDate = (date) => {
+  const minDate = new Date("1995-06-20");
+  const today = new Date();
+  
+  return !(minDate <= date && date <= today);
+}
 
 function App() {
   const {
@@ -23,45 +30,38 @@ function App() {
     setRandomDate
   } = useDateReducer();
   const formattedDate = formatDate(date);
-  const { isLoading, error, data = {} } = useQuery(['apod', formattedDate], fetchApodData);
+  const { isLoading, error, data = {} } = useQuery(['apod', formattedDate], fetchApodDataQuery);
   const [isDescriptionVisible, setDescriptionVisibile] = useState(false);
   const [isAboutInfoVisible, setAboutInfoVisible] = useState(false);
-
-  const validateDate = (date) => {
-    const minDate = new Date("1995-06-20");
-    const today = new Date();
-    
-    return !(minDate <= date && date <= today);
-  }
-  const {url, hdurl, explanation, media_type, title, copyright} = data;
+  const {explanation, title, copyright} = data;
   
   return (
     <div className="App">
       <h1 style={{color: 'white', textAlign: 'center'}}>NASA's Astronomy Picture of the day</h1>
       <div className="controls">
-        <Button disabled={isLoading} onClick={decrementDate}>{'< '}Prev</Button>
-        <Button disabled={isLoading} onClick={incrementDate}>Next{' >'}</Button>
-        <Button disabled={isLoading} onClick={setRandomDate}>Random</Button>
-        <Button disabled={isLoading} onClick={() => setDescriptionVisibile(true)}>About this pic</Button>
-        <Button disabled={isLoading} onClick={resetDate}>Today</Button>
-        <DatePicker 
+        <Button data-testid="prevBtn" disabled={isLoading} onClick={decrementDate}>Prev</Button>
+        <Button data-testid="nextBtn" disabled={isLoading} onClick={incrementDate}>Next</Button>
+        <Button data-testid="randomBtn" disabled={isLoading} onClick={setRandomDate}>Random</Button>
+        <Button data-testid="aboutBtn" disabled={isLoading} onClick={() => setDescriptionVisibile(true)}>About this pic</Button>
+        <Button data-testid="todayBtn" disabled={isLoading} onClick={resetDate}>Today</Button>
+        <DatePicker
+          data-testid="datepicker" 
           disabled={isLoading}
           disabledDate={validateDate}
           defaultValue={date}
           value={date}
           onChange={setDate}
         />
-        <Button onClick={() => setAboutInfoVisible(true)}>❔</Button>
+        <Button data-testid="appInfoBtn" onClick={() => setAboutInfoVisible(true)}>❔</Button>
       </div>
       <div style={{textAlign: 'center'}}>
-        {isLoading ? <Spin size='large' /> : null}
-        <Image 
-          src={url}
-          style={{maxHeight: '80vh', objectFit: 'contain'}}
-          preview={{
-            src: hdurl
-          }} 
-        />
+        {
+          isLoading 
+            ? <Spin size='large' data-testid="spinner" /> 
+            : error
+              ? <p style={{color: 'white'}}>{error.message}</p>
+              : <Viewer data={data} />
+        }
       </div>
       <Drawer
         title="About app"
@@ -71,9 +71,11 @@ function App() {
         visible={isAboutInfoVisible}
         key={'about app'}
       >
-        <p>Based on <a href='https://api.nasa.gov/'>NASA API</a></p>
-        <p>Made by <a href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
-        <p><a href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
+        <div data-testid="appInfo">
+          <p>Based on <a href='https://api.nasa.gov/'>NASA API</a></p>
+          <p>Made by <a href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
+          <p><a href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
+        </div>
       </Drawer>
       <Drawer
           title={title}

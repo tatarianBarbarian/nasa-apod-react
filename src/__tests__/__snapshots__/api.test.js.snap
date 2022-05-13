@@ -1,0 +1,5 @@
+// Vitest Snapshot v1
+
+exports[`api > should return data if service returns it 1`] = `"{\\"date\\":\\"2022-05-08\\",\\"explanation\\":\\"Today's pic\\",\\"hdurl\\":\\"/src/mock/img/1_hd.jpg\\",\\"media_type\\":\\"image\\",\\"service_version\\":\\"v1\\",\\"title\\":\\"Spiral Galaxy NGC 1512: The Inner Rings\\",\\"url\\":\\"/src/mock/img/1.jpg\\"}"`;
+
+exports[`api > should throw an error if network error occured 1`] = `"expected is not a function"`;
