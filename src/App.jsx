@@ -8,7 +8,7 @@ import 'antd/es/spin/style/index.css';
 import { Viewer } from './Viewer';
 
 import { useQuery } from 'react-query';
-import { fetchApodData } from './api';
+import { fetchApodDataQuery } from './api';
 import {useDateReducer} from './useDateReducer';
 import { useState } from 'react';
 import { formatDate } from './date';
@@ -30,7 +30,7 @@ function App() {
     setRandomDate
   } = useDateReducer();
   const formattedDate = formatDate(date);
-  const { isLoading, error, data = {} } = useQuery(['apod', formattedDate], fetchApodData);
+  const { isLoading, error, data = {} } = useQuery(['apod', formattedDate], fetchApodDataQuery);
   const [isDescriptionVisible, setDescriptionVisibile] = useState(false);
   const [isAboutInfoVisible, setAboutInfoVisible] = useState(false);
   const {explanation, title, copyright} = data;
