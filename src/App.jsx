@@ -52,7 +52,7 @@ function App() {
           value={date}
           onChange={setDate}
         />
-        <Button onClick={() => setAboutInfoVisible(true)}>❔</Button>
+        <Button data-testid="appInfoBtn" onClick={() => setAboutInfoVisible(true)}>❔</Button>
       </div>
       <div style={{textAlign: 'center'}}>
         {
@@ -71,9 +71,11 @@ function App() {
         visible={isAboutInfoVisible}
         key={'about app'}
       >
-        <p>Based on <a href='https://api.nasa.gov/'>NASA API</a></p>
-        <p>Made by <a href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
-        <p><a href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
+        <div data-testid="appInfo">
+          <p>Based on <a href='https://api.nasa.gov/'>NASA API</a></p>
+          <p>Made by <a href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
+          <p><a href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
+        </div>
       </Drawer>
       <Drawer
           title={title}

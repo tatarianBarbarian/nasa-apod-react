@@ -91,4 +91,49 @@ describe('App', () => {
         expect(message).toBeVisible()
         expect(message.textContent).toMatchInlineSnapshot('"Error 400: Error happened!"')
     })
+
+    it('should load previous day picture when clicked on prev button', async () => {
+        const {container} = render(<Wrapped />)
+
+        await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
+        await userEvent.click(screen.getByTestId('prevBtn'))
+        await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
+
+        expect(container).toMatchSnapshot()
+    })
+
+    it.todo('displays disabled previous day button if date is today')
+
+    it('should load next day picture when clicked on next button', async () => {
+        const {container} = render(<Wrapped />)
+
+        await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
+        await userEvent.click(screen.getByTestId('prevBtn'))
+        await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
+        await userEvent.click(screen.getByTestId('nextBtn'))
+
+        expect(container).toMatchSnapshot()
+    })
+
+    it.todo('displays disabled next day button if date is today')
+
+    it('[flaky]should display today photo if today button clicked', async () => {
+        const {container} = render(<Wrapped />)
+
+        await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
+        await userEvent.click(screen.getByTestId('prevBtn'))
+        await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
+        await userEvent.click(screen.getByTestId('todayBtn'))
+
+        expect(container).toMatchSnapshot()
+    })
+
+    it('should display application info if about button clicked', async () => {
+        render(<Wrapped />)
+        
+        await userEvent.click(screen.getByTestId('appInfoBtn'))
+        const info = screen.getByTestId('appInfo')
+        
+        expect(info).toMatchSnapshot()
+    })
 })
