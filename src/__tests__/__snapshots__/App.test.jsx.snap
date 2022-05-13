@@ -186,6 +186,8 @@ exports[`App > should display application info if about button clicked 1`] = `
     Based on 
     <a
       href="https://api.nasa.gov/"
+      rel="noopener norefer"
+      target="_blank"
     >
       NASA API
     </a>
@@ -194,6 +196,8 @@ exports[`App > should display application info if about button clicked 1`] = `
     Made by 
     <a
       href="https://github.com/tatarianBarbarian"
+      rel="noopener norefer"
+      target="_blank"
     >
       Felix Khafizov
     </a>
@@ -201,6 +205,8 @@ exports[`App > should display application info if about button clicked 1`] = `
   <p>
     <a
       href="https://github.com/tatarianBarbarian/nasa-apod-react"
+      rel="noopener norefer"
+      target="_blank"
     >
       Source code
     </a>

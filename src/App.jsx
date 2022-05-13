@@ -72,9 +72,9 @@ function App() {
         key={'about app'}
       >
         <div data-testid="appInfo">
-          <p>Based on <a href='https://api.nasa.gov/'>NASA API</a></p>
-          <p>Made by <a href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
-          <p><a href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
+          <p>Based on <a target="_blank" rel="noopener norefer" href='https://api.nasa.gov/'>NASA API</a></p>
+          <p>Made by <a target="_blank" rel="noopener norefer" href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
+          <p><a target="_blank" rel="noopener norefer" href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
         </div>
       </Drawer>
       <Drawer
