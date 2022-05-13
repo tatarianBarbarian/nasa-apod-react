@@ -23,6 +23,6 @@ describe('<Viewer />', () => {
         const message = screen.getByText(/unsupported/i);
 
         expect(message).toBeVisible();
-        expect(message.textContent).toMatchInlineSnapshot('"Unsupported media type, try another day"');
+        expect(message.textContent).toMatchInlineSnapshot('"Unsupported media type, try another day or try watching on NASA APOD project: https://apod.nasa.gov/apod/ap.html"');
     })
 })

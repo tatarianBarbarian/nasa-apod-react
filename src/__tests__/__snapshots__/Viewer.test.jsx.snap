@@ -8,7 +8,6 @@ exports[`<Viewer /> > given correct data, should try render image 1`] = `
     <img
       class="ant-image-img"
       src="/src/mock/img/1.jpg"
-      style="max-height: 80vh; object-fit: contain;"
     />
     <div
       class="ant-image-mask"

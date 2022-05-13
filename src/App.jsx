@@ -36,7 +36,7 @@ function App() {
   const {explanation, title, copyright} = data;
   
   return (
-    <div className="App">
+    <div className="App container">
       <h1 style={{color: 'white', textAlign: 'center'}}>NASA's Astronomy Picture of the day</h1>
       <div className="controls">
         <Button data-testid="prevBtn" disabled={isLoading} onClick={decrementDate}>Prev</Button>
@@ -72,9 +72,9 @@ function App() {
         key={'about app'}
       >
         <div data-testid="appInfo">
-          <p>Based on <a href='https://api.nasa.gov/'>NASA API</a></p>
-          <p>Made by <a href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
-          <p><a href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
+          <p>Based on <a target="_blank" rel="noopener norefer" href='https://api.nasa.gov/'>NASA API</a></p>
+          <p>Made by <a target="_blank" rel="noopener norefer" href='https://github.com/tatarianBarbarian'>Felix Khafizov</a></p>
+          <p><a target="_blank" rel="noopener norefer" href='https://github.com/tatarianBarbarian/nasa-apod-react'>Source code</a></p>
         </div>
       </Drawer>
       <Drawer
