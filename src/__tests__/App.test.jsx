@@ -4,8 +4,8 @@ import { render, screen, waitForElementToBeRemoved } from '@testing-library/reac
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import { setupServer } from 'msw/node';
 import { handler } from '../mock/handler';
-import userEvent from '@testing-library/user-event'
 import { rest } from 'msw';
+import userEvent from '@testing-library/user-event'
 import { API_URL } from '../api';
 
 const server = setupServer(handler);
