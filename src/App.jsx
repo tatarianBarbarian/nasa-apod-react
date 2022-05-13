@@ -36,7 +36,7 @@ function App() {
   const {explanation, title, copyright} = data;
   
   return (
-    <div className="App">
+    <div className="App container">
       <h1 style={{color: 'white', textAlign: 'center'}}>NASA's Astronomy Picture of the day</h1>
       <div className="controls">
         <Button data-testid="prevBtn" disabled={isLoading} onClick={decrementDate}>Prev</Button>
