@@ -26,8 +26,8 @@ const dateReducer = (date, action) => {
   }
 }
 
-export const useDateReducer = () => {
-  const [date, dispatch] = useReducer(dateReducer, new Date());
+export const useDateReducer = (dt) => {
+  const [date, dispatch] = useReducer(dateReducer, new Date(dt));
   const incrementDate = () => dispatch({ type: actionTypes.GET_NEXT_DATE });
   const decrementDate = () => dispatch({ type: actionTypes.GET_PREV_DATE });
   const setRandomDate = () => dispatch({ type: actionTypes.GET_RANDOM_DATE });
