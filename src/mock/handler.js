@@ -44,8 +44,8 @@ const other = {
 
 export const handler = rest.get(API_URL, (req, res, ctx) => {
     const reqDate = req.url.searchParams.get('date');
-    const today = formatDate(new Date());
-    const todayRaw = new Date();
+    const today = formatDate(new Date('2022-05-13'));
+    const todayRaw = new Date('2022-05-13');
 
     if (reqDate === today) {
         return res(
