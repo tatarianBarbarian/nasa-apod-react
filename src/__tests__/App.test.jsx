@@ -1,4 +1,4 @@
-import { describe } from 'vitest';
+import { describe, vi } from 'vitest';
 import App from '../App';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
@@ -10,9 +10,15 @@ import { API_URL } from '../api';
 
 const server = setupServer(handler);
 
-beforeAll(() => server.listen());
+beforeAll(() => {
+    vi.setSystemTime(new Date("2022-05-13"));
+    server.listen()
+});
 afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+afterAll(() => {
+    vi.useRealTimers();
+    server.close()
+});
 
 setLogger({
     error: () => {},
