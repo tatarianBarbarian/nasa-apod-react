@@ -17,6 +17,7 @@ beforeAll(() => {
 afterEach(() => server.resetHandlers());
 afterAll(() => {
     vi.useRealTimers();
+    vi.setSystemTime(vi.getRealSystemTime());
     server.close()
 });
 

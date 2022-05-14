@@ -42,10 +42,12 @@ const other = {
     "title": "Star Trails over the Canada-France-Hawaii Telescope"
 }
 
+const isTests = import.meta.env.TEST;
+
 export const handler = rest.get(API_URL, (req, res, ctx) => {
     const reqDate = req.url.searchParams.get('date');
-    const today = formatDate(new Date('2022-05-13'));
-    const todayRaw = new Date('2022-05-13');
+    const todayRaw = isTests ? new Date('2022-05-13') : new Date();
+    const today = formatDate(todayRaw);
 
     if (reqDate === today) {
         return res(
