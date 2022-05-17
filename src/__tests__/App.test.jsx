@@ -7,6 +7,9 @@ import { handler } from '../mock/handler';
 import { rest } from 'msw';
 import userEvent from '@testing-library/user-event'
 import { API_URL } from '../api';
+import {Router} from 'react-router-dom'
+import {createMemoryHistory} from 'history'
+
 
 const server = setupServer(handler);
 
@@ -35,9 +38,13 @@ const Wrapped = () => {
             },
         },
     });
+    const history = createMemoryHistory()
+
     return (
         <QueryClientProvider client={queryClient}>
-            <App />
+            <Router location={history.location} navigator={history}>
+                <App />
+            </Router>
         </QueryClientProvider>
     )
 };
