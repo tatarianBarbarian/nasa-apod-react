@@ -40,8 +40,8 @@ function App() {
   const {explanation, title, copyright} = data;
 
   useEffect(() => {
-    navigate(`/${formatDate(date)}`)
-  }, [date])
+    navigate(`/${formattedDate}`)
+  }, [formattedDate])
 
   return (
     <div className="App container">
