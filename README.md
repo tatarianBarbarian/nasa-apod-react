@@ -17,6 +17,7 @@ Local run:
 
 - React with hooks
 - [react-query](https://react-query.tanstack.com/)
+- [react-router](https://reactrouter.com/)
 - [Vite](https://vitejs.dev/)
 - [Vitest](https://vitest.dev/)
 - [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro)
