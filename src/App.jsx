@@ -10,8 +10,9 @@ import { Viewer } from './Viewer';
 import { useQuery } from 'react-query';
 import { fetchApodDataQuery } from './api';
 import {useDateReducer} from './useDateReducer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formatDate } from './date';
+import {useParams, useNavigate} from 'react-router-dom';
 
 const validateDate = (date) => {
   const minDate = new Date("1995-06-20");
@@ -21,6 +22,9 @@ const validateDate = (date) => {
 }
 
 function App() {
+  const navigate = useNavigate();
+  const dt = useParams().date || formatDate(new Date())
+
   const {
     date, 
     incrementDate, 
@@ -28,13 +32,17 @@ function App() {
     resetDate, 
     setDate, 
     setRandomDate
-  } = useDateReducer();
+  } = useDateReducer(dt);
   const formattedDate = formatDate(date);
   const { isLoading, error, data = {} } = useQuery(['apod', formattedDate], fetchApodDataQuery);
   const [isDescriptionVisible, setDescriptionVisibile] = useState(false);
   const [isAboutInfoVisible, setAboutInfoVisible] = useState(false);
   const {explanation, title, copyright} = data;
-  
+
+  useEffect(() => {
+    navigate(`/${formattedDate}`)
+  }, [formattedDate])
+
   return (
     <div className="App container">
       <h1 style={{color: 'white', textAlign: 'center'}}>NASA's Astronomy Picture of the day</h1>

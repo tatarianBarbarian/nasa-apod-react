@@ -7,6 +7,9 @@ import { handler } from '../mock/handler';
 import { rest } from 'msw';
 import userEvent from '@testing-library/user-event'
 import { API_URL } from '../api';
+import {Router} from 'react-router-dom'
+import {createMemoryHistory} from 'history'
+
 
 const server = setupServer(handler);
 
@@ -35,9 +38,12 @@ const customRender = (ui, options = {}) => {
             },
         },
     });
+    const history = createMemoryHistory();
     const Wrapper = ({children}) => (
         <QueryClientProvider client={queryClient}>
-            {children}
+            <Router location={history.location} navigator={history}>
+                {children}
+            </Router>
         </QueryClientProvider>
     );
 

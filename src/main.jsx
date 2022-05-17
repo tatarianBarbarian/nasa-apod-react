@@ -6,8 +6,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
-
-console.log(import.meta.env);
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 async function prepare() {
   if (import.meta.env.DEV && !import.meta.env.TEST) {
@@ -22,7 +21,14 @@ const queyClient = new QueryClient();
 prepare().then(() => {
   ReactDOM.createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queyClient}>
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<App/>} />
+            <Route path=':date' element={<App />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </QueryClientProvider>
   )
 })
