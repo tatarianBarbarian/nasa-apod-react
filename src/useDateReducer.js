@@ -26,7 +26,7 @@ const dateReducer = (date, action) => {
   }
 }
 
-export const useDateReducer = (dt) => {
+export const useDateReducer = (dt = new Date()) => {
   const [date, dispatch] = useReducer(dateReducer, new Date(dt));
   const incrementDate = () => dispatch({ type: actionTypes.GET_NEXT_DATE });
   const decrementDate = () => dispatch({ type: actionTypes.GET_PREV_DATE });

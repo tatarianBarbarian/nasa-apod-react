@@ -30,7 +30,7 @@ setLogger({
     log: console.log,
 })
 
-const Wrapped = () => {
+const customRender = (ui, options = {}) => {
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
@@ -38,20 +38,21 @@ const Wrapped = () => {
             },
         },
     });
-    const history = createMemoryHistory()
-
-    return (
+    const history = createMemoryHistory();
+    const Wrapper = ({children}) => (
         <QueryClientProvider client={queryClient}>
             <Router location={history.location} navigator={history}>
-                <App />
+                {children}
             </Router>
         </QueryClientProvider>
-    )
-};
+    );
+
+    return render(ui, {wrapper: Wrapper, ...options})
+}
 
 describe('App', () => {
     it('should render spinner while fetching data', async () => {
-        render(<Wrapped />);
+        customRender(<App />);
 
         const spinner = screen.getByTestId('spinner')
         expect(spinner).toBeInTheDocument();
@@ -59,7 +60,7 @@ describe('App', () => {
     });
 
     it('should disable controls while fetching data', async () => {
-        render(<Wrapped />);
+        customRender(<App />);
 
         expect(screen.getByTestId('prevBtn')).toBeDisabled();
         expect(screen.getByTestId('nextBtn')).toBeDisabled();
@@ -79,7 +80,7 @@ describe('App', () => {
     });
 
     it('should display pic info when asked', async () => {
-        render(<Wrapped />)
+        customRender(<App />);
 
         await waitForElementToBeRemoved(() => screen.getByTestId('spinner'));
         await userEvent.click(screen.getByTestId('aboutBtn'))
@@ -95,7 +96,7 @@ describe('App', () => {
             return res(ctx.json({msg: errorMessage, code: 400}))
         }))
 
-        render(<Wrapped />)
+        customRender(<App />);
 
         await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
 
@@ -107,7 +108,7 @@ describe('App', () => {
     })
 
     it('should load previous day picture when clicked on prev button', async () => {
-        const {container} = render(<Wrapped />)
+        const {container} = customRender(<App />);
 
         await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
         await userEvent.click(screen.getByTestId('prevBtn'))
@@ -119,7 +120,7 @@ describe('App', () => {
     it.todo('displays disabled previous day button if date is today')
 
     it('should load next day picture when clicked on next button', async () => {
-        const {container} = render(<Wrapped />)
+        const {container} = customRender(<App />);
 
         await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
         await userEvent.click(screen.getByTestId('prevBtn'))
@@ -132,7 +133,7 @@ describe('App', () => {
     it.todo('displays disabled next day button if date is today')
 
     it('[flaky]should display today photo if today button clicked', async () => {
-        const {container} = render(<Wrapped />)
+        const {container} = customRender(<App />);
 
         await waitForElementToBeRemoved(() => screen.getByTestId('spinner'))
         await userEvent.click(screen.getByTestId('prevBtn'))
@@ -143,7 +144,7 @@ describe('App', () => {
     })
 
     it('should display application info if about button clicked', async () => {
-        render(<Wrapped />)
+        customRender(<App />);
         
         await userEvent.click(screen.getByTestId('appInfoBtn'))
         const info = screen.getByTestId('appInfo')
