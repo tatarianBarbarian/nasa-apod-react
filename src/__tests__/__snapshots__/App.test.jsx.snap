@@ -195,7 +195,7 @@ exports[`App > should display application info if about button clicked 1`] = `
   <p>
     Made by 
     <a
-      href="https://github.com/tatarianBarbarian"
+      href="https://f-k.dev/about"
       rel="noopener norefer"
       target="_blank"
     >
